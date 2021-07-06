@@ -14,7 +14,7 @@
       </li>
     </ul>
     <div v-if="admin">
-    <router-link class="mr-2 btn btn-success" to="/photo/add">Add Photo</router-link>
+    <router-link class="mr-2 btn btn-success" to="/photos/add">Add Photo</router-link>
     <router-link class="mr-2 btn btn-success" to="/albums/add">Add Album</router-link>
     </div>
     <router-link class="btn btn-success" to="/login" v-if="!login"
@@ -45,8 +45,6 @@ export default {
     checkLogin () {
         if (localStorage.getItem('access_token')) {
             this.login = true
-        } else {
-            this.login = false
         }
     },
     checkAdmin () {

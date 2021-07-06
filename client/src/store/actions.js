@@ -3,7 +3,6 @@ const baseURL = 'http://localhost:3000'
 import Swal from 'sweetalert2'
 
 export function login({ commit }, { email, password, router }) {
-    // console.log(email, passwo rd)
     const data = {
         email,
         password
@@ -11,7 +10,6 @@ export function login({ commit }, { email, password, router }) {
     axios
         .post(`${baseURL}/login`, data)
         .then(res => {
-            // console.log(res)
             localStorage.setItem('access_token', res.data.access_token)
             localStorage.setItem('roles', res.data.roles)
             router.push('/')
@@ -20,7 +18,6 @@ export function login({ commit }, { email, password, router }) {
 }
 
 export function register({ commit }, { email, password, router }) {
-    // console.log(email, password)
     const data = {
         email,
         password
@@ -28,7 +25,6 @@ export function register({ commit }, { email, password, router }) {
     axios
         .post(`${baseURL}/register`, data)
         .then(res => {
-            // console.log(res)
             router.push('/login')
             Swal.fire(
                 'Success',
@@ -47,7 +43,6 @@ export function getPhotos({ commit }) {
             }
         })
         .then(res => {
-            // console.log(res.data)
             commit('SET_PHOTOS', res.data)
         })
         .catch(error => console.log(error))
@@ -61,7 +56,6 @@ export function getPhotoById ({commit}, { id, router}) {
         }
     })
     .then((response) => {
-        console.log(id)
         commit('SET_PHOTOBYID', response.data)
         router.push(`/photos/${id}`)
     })
@@ -75,7 +69,7 @@ export function addPhoto ({commit}, {title, url, thumbnailUrl, albumId, router})
         albumId: albumId,
       }
     axios
-    .post(`${baseURL}`, addData, {
+    .post(`${baseURL}/photos`, addData, {
         headers: {
             access_token: localStorage.access_token
         }
@@ -138,7 +132,7 @@ export function updatePhotoAlbum({ state, dispatch }, {id, router}) {
     .catch((error) => console.log(error))
 }
 
-export function deletePhoto ({dispatch}, {id}) {
+export function deletePhoto ({dispatch}, {id, router}) {
     axios
     .delete(`${baseURL}/photos/${id}`, {
         headers: {
@@ -147,6 +141,12 @@ export function deletePhoto ({dispatch}, {id}) {
     })
     .then((response) => {
         dispatch('getPhotos')
+        router.push('/')
+        Swal.fire(
+            'Success',
+            'Photo has been deleted',
+            'success'
+          )
     })
     .catch((error) => console.log(error))
 }
@@ -160,7 +160,6 @@ export function getAlbum({ commit }) {
             }
         })
         .then(res => {
-            // console.log(res.data)
             commit('SET_ALBUMS', res.data)
         })
         .catch(error => console.log(error))
@@ -185,7 +184,7 @@ export function addAlbum ({commit}, {title, router}) {
         title: title
       }
     axios
-    .post(`${baseURL}`, addData, {
+    .post(`${baseURL}/albums`, addData, {
         headers: {
             access_token: localStorage.access_token
         }
@@ -223,7 +222,7 @@ export function updateAlbum({ state, dispatch }, {id, router}) {
     .catch((error) => console.log(error))
 }
 
-export function deleteAlbum ({dispatch}, {id}) {
+export function deleteAlbum ({dispatch}, {id, router}) {
     axios
     .delete(`${baseURL}/albums/${id}`, {
         headers: {
@@ -232,6 +231,12 @@ export function deleteAlbum ({dispatch}, {id}) {
     })
     .then((response) => {
         dispatch('getAlbum')
+        router.push('/albums')
+        Swal.fire(
+            'Success',
+            'Photo has been deleted',
+            'success'
+          )
     })
     .catch((error) => console.log(error))
 }

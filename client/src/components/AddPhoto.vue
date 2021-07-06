@@ -3,42 +3,44 @@
     <Navbar />
     <div class="container mt-3">
       <form>
-        <label for="title" >Title :</label><br />
-        <div >
+        <label for="title">Title :</label><br />
+        <div>
           <input
             type="text"
             class="form-control col-6"
             required
-            v-model="photo.title"
+            v-model="title"
           /><br />
         </div>
 
-        <label for="image" >Image URL :</label><br />
-        <div >
+        <label for="image">Image URL :</label><br />
+        <div>
           <textarea
             class="form-control col-6"
             rows="2"
             type="text"
             required
-            v-model="photo.url"
+            v-model="url"
           /><br />
         </div>
 
         <label for="image">Image thumbnail URL</label><br />
-        <div >
+        <div>
           <textarea
             class="form-control col-6"
             rows="2"
             type="text"
             required
-            v-model="photo.thumbnailUrl"
+            v-model="thumbnailUrl"
           /><br />
         </div>
 
         <label for="albumId">Album</label><br />
-        <div >
-          <select v-model="photo.albumId" class="form-control col-6" >
-            <option v-for="album in albums" :key="album.id">{{album.id}}</option>
+        <div>
+          <select v-model="albumId" class="form-control col-6">
+            <option v-for="album in listAlbums" :key="album.id">
+              {{ album.id }}
+            </option>
           </select>
           <br />
         </div>
@@ -47,9 +49,9 @@
         <button
           type="button"
           class="btn btn-primary btn-block form-control col-6"
-          @click.prevent="updatePhoto(photo.id)"
+          @click.prevent="SavePhoto()"
         >
-          Save changes
+          Add Photo
         </button>
       </form>
     </div>
@@ -59,32 +61,45 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
 export default {
-  name: "Update",
+  name: "AddPhoto",
   components: {
     Navbar,
   },
+  data() {
+    return {
+      title: "",
+      url: "",
+      thumbnailUrl: "",
+      albumId: "",
+    //   arrOfAlbum: []
+    };
+  },
   computed: {
-    photo() {
-      return this.$store.state.photo;
+    listAlbums() {
+    //    this.arrOfAlbum = this.$store.state.albums
+      return this.$store.state.albums;
     },
-    albums() {
-        return this.$store.state.albums
-    }
   },
   methods: {
-    getAlbum() {
-      this.$store.dispatch('getAlbum');
+    getAlbums() {
+      this.$store.dispatch("getAlbum");
     },
-    updatePhoto(id) {
-      this.$store.dispatch("updatePhoto", {
-        id: id,
+    SavePhoto() {
+      this.$store.dispatch('addPhoto', {
+        title: this.title,
+        url: this.url,
+        thumbnailUrl: this.thumbnailUrl,
+        albumId: this.albumId,
         router: this.$router,
       });
-    },
+    }
   },
-  mounted() {
-    this.getAlbum();
+  created() {
+      this.getAlbums();
   },
+//   mounted() {
+    // this.listAlbums()
+//   },
 };
 </script>
 

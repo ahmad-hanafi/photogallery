@@ -2,9 +2,6 @@
   <div class="container">
     <div class="row">
       <div class="card mt-2 mr-2 ml-2 mb-2" style="width: 300px;"  v-for="album in albums" :key="album.id">
-        <!-- <div class="card-image rounded mx-auto d-block">
-          <img :src="album.thumbnailUrl" alt="card image"  style="width: 150px; position: center;"/>
-        </div> -->
         <div class="card-body">
           <h3>{{ album.title }}</h3>
         </div>

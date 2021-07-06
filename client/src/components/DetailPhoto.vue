@@ -56,7 +56,6 @@ export default {
     },
     checkAdmin () {
          let data = localStorage.getItem('roles')
-         console.log(data)
         if (data === 'Admin') {
             this.admin = true
         }

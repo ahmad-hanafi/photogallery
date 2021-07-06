@@ -23,6 +23,11 @@ const routes = [
     component: Register
   },
   {
+    path: '/photos/add',
+    name: 'AddPhoto',
+    component: () => import(/* webpackChunkName: "about" */ '../components/AddPhoto.vue')
+  },
+  {
     path: '/photos/:id',
     name: 'DetailPhoto',
     component: () => import(/* webpackChunkName: "about" */ '../components/DetailPhoto.vue')
@@ -36,6 +41,11 @@ const routes = [
     path: '/albums',
     name: 'Album',
     component: () => import(/* webpackChunkName: "about" */ '../views/Album.vue')
+  },
+  {
+    path: '/albums/add',
+    name: 'AddAlbum',
+    component: () => import(/* webpackChunkName: "about" */ '../components/AddAlbum.vue')
   },
   {
     path: '/albums/:id',
