@@ -13,6 +13,11 @@ export default new Vuex.Store({
     album: []
   },
   mutations,
+  getters: {
+    filteredAlbums: (state) => (val) => {
+      return state.photos.filter(photos => {return val.toLowerCase().split(' ').every(v => photos.title.toLowerCase().includes(v))})
+    }
+  },
   actions,
   modules: {
   }

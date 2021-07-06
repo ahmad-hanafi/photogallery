@@ -40,7 +40,6 @@ export default {
     logout() {
       localStorage.removeItem("access_token");
       localStorage.removeItem("roles");
-    //   this.admin = false
       this.$router.push("/login");
     },
     checkLogin () {
@@ -52,12 +51,8 @@ export default {
     },
     checkAdmin () {
         let data = localStorage.getItem('roles')
-        console.log(data)
         if (data === 'Admin') {
             this.admin = true
-        } else {
-            console.log('masuk false')
-            this.admin = false
         }
     }
   },
