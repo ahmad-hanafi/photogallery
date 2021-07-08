@@ -202,7 +202,7 @@ export function addAlbum ({commit}, {title, router}) {
 
 export function updateAlbum({ state, dispatch }, {id, router}) {
     const dataUpdate = {
-        title: state.photo.title
+        title: state.album.title
     }
     axios
     .patch(`${baseURL}/albums/${id}`, dataUpdate, {

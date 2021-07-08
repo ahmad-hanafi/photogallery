@@ -9,14 +9,14 @@
             type="text"
             class="form-control col-6"
             required
-            v-model="photo.title"
+            v-model="album.title"
           /><br />
         </div>
         <hr />
         <button
           type="button"
           class="btn btn-primary btn-block form-control col-6"
-          @click.prevent="updatePhoto(photo.id)"
+          @click.prevent="updateAlbum(album.id)"
         >
           Save changes
         </button>
@@ -36,16 +36,16 @@ export default {
     photo() {
       return this.$store.state.photo;
     },
-    albums() {
-        return this.$store.state.albums
+    album() {
+        return this.$store.state.album
     }
   },
   methods: {
     getAlbum() {
       this.$store.dispatch('getAlbum');
     },
-    updatePhoto(id) {
-      this.$store.dispatch("updatePhoto", {
+    updateAlbum(id) {
+      this.$store.dispatch("updateAlbum", {
         id: id,
         router: this.$router,
       });
